@@ -69,6 +69,7 @@ import com.owncloud.android.presentation.capabilities.CapabilityViewModel
 import com.owncloud.android.presentation.common.DrawerViewModel
 import com.owncloud.android.presentation.common.UIResult
 import com.owncloud.android.presentation.settings.SettingsActivity
+import com.owncloud.android.ui.helpers.LocaleHelper
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -265,26 +266,12 @@ abstract class DrawerActivity : ToolbarActivity() {
     }
 
     private fun changeLocale(context: Context) {
-        val config = resources.configuration
-        val localeLang = config.locales.toLanguageTags()
-        Timber.tag("DrawerActivity").d(localeLang)
-        Timber.tag("DrawerActivity").d(localeLang.contains("vi").toString())
-        val prefs: SharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
+        val localeLang = LocaleHelper.getLanguage(context)
         if (localeLang.contains("vi")) {
-            config.setLocale(Locale("en"))
-            with(prefs.edit()) {
-                putString("My_Lang", "en")
-                apply()
-            }
+            LocaleHelper.persist(context, "en")
         } else {
-            config.setLocale(Locale("vi"))
-            with(prefs.edit()) {
-                putString("My_Lang", "vi")
-                apply()
-            }
+            LocaleHelper.persist(context, "vi")
         }
-        resources.updateConfiguration(config, resources.displayMetrics)
-//        context.createConfigurationContext(config)
         recreate()
     }
 

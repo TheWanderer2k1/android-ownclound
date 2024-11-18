@@ -23,6 +23,7 @@ import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.OperationCanceledException;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import com.owncloud.android.presentation.authentication.AccountUtils;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.domain.files.model.OCFile;
 import com.owncloud.android.ui.dialog.LoadingDialog;
+import com.owncloud.android.ui.helpers.LocaleHelper;
 import timber.log.Timber;
 
 /**
@@ -326,5 +328,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             return;
         }
         Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
     }
 }
