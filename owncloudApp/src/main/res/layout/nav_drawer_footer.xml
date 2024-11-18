@@ -26,12 +26,12 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/drawer_logo"
         android:layout_width="0dp"
-        android:layout_height="140dp"
+        android:layout_height="200dp"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/drawer_logo" />
+        tools:src="@drawable/logo_clouddc" />
 
     <ImageView
         android:id="@+id/drawer_link_icon"

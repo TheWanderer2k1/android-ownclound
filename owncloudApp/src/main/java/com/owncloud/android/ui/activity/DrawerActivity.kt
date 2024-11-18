@@ -104,7 +104,8 @@ abstract class DrawerActivity : ToolbarActivity() {
 
         // Set background header image, if any
         if (resources.getBoolean(R.bool.use_drawer_background_header)) {
-            getDrawerHeaderBackground()?.setImageResource(R.drawable.drawer_header_background)
+//            getDrawerHeaderBackground()?.setImageResource(R.drawable.drawer_header_background)
+            getDrawerHeaderBackground()?.setImageResource(R.drawable.red_and_blue_bg)
         }
 
         // Set logo and text for drawer link, if any
@@ -121,7 +122,8 @@ abstract class DrawerActivity : ToolbarActivity() {
                     setAccessibilityRole(roleDescription = context.getString(R.string.link_role_accessibility))
                 }
             } else {
-                getDrawerLogo()?.setImageResource(R.drawable.drawer_logo)
+//                getDrawerLogo()?.setImageResource(R.drawable.drawer_logo)
+                getDrawerLogo()?.setImageResource(R.drawable.logo_clouddc)
             }
         }
 

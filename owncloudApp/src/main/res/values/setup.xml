@@ -2,7 +2,7 @@
 <resources>
 
     <!-- App name and other strings-->
-    <string name="app_name" formatted="false">ownCloud</string>
+    <string name="app_name" formatted="false">Mobifone-ownCloud</string>
     <string name="account_type" formatted="false">owncloud</string>    <!-- better if was a domain name; but changing it now would require migrate accounts when the app is updated -->
     <string name="authority" formatted="false">org.owncloud</string>
     <string name="document_provider_authority" formatted="false">org.owncloud.documents</string>
@@ -13,7 +13,7 @@
     <string name="db_name" formatted="false">ownCloud</string>
     <string name="data_folder" formatted="false">owncloud</string>
     <string name="log_name" formatted="false">Owncloud_</string>
-    <string name="default_display_name_for_root_folder" formatted="false">ownCloud</string>
+    <string name="default_display_name_for_root_folder" formatted="false">MobiFone File Storage</string>
     <string name="user_agent">Mozilla/5.0 (Android) ownCloud-android/%1$s</string>
 
     <!-- URLs and flags related -->

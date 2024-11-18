@@ -71,7 +71,7 @@
             app:layout_constraintEnd_toStartOf="@id/root_toolbar_avatar"
             app:layout_constraintStart_toEndOf="@id/root_toolbar_left_icon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="ownCloud" />
+            tools:text="MobiFone File Storage" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/root_toolbar_avatar"

@@ -207,7 +207,7 @@ def setOutputFileName(variant, appName, callerProject) {
     if (appName) {
         newName += appName
     } else {
-        newName += "owncloud"
+        newName += "mobifoneFS-owncloud"
     }
 
     def versionName = "$variant.mergedFlavor.versionName"
