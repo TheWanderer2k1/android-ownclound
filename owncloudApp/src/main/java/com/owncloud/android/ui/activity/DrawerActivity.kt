@@ -29,7 +29,9 @@ package com.owncloud.android.ui.activity
 import android.accounts.Account
 import android.accounts.AccountManager
 import android.accounts.AccountManagerFuture
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -72,6 +74,7 @@ import com.owncloud.android.utils.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
+import java.util.Locale
 import kotlin.math.ceil
 
 /**
@@ -190,7 +193,7 @@ abstract class DrawerActivity : ToolbarActivity() {
                 R.id.drawer_menu_feedback -> openFeedback()
                 R.id.drawer_menu_help -> openHelp()
                 R.id.drawer_menu_privacy_policy -> openPrivacyPolicy()
-                R.id.drawer_menu_locale -> changeLocale()
+                R.id.drawer_menu_locale -> changeLocale(applicationContext)
                 else -> Timber.i("Unknown drawer menu item clicked: %s", menuItem.title)
             }
             true
@@ -261,8 +264,28 @@ abstract class DrawerActivity : ToolbarActivity() {
         sendEmailOrOpenFeedbackDialogAction(drawerViewModel.getFeedbackMail())
     }
 
-    private fun changeLocale() {
-
+    private fun changeLocale(context: Context) {
+        val config = resources.configuration
+        val localeLang = config.locales.toLanguageTags()
+        Timber.tag("DrawerActivity").d(localeLang)
+        Timber.tag("DrawerActivity").d(localeLang.contains("vi").toString())
+        val prefs: SharedPreferences = getSharedPreferences("Settings", MODE_PRIVATE)
+        if (localeLang.contains("vi")) {
+            config.setLocale(Locale("en"))
+            with(prefs.edit()) {
+                putString("My_Lang", "en")
+                apply()
+            }
+        } else {
+            config.setLocale(Locale("vi"))
+            with(prefs.edit()) {
+                putString("My_Lang", "vi")
+                apply()
+            }
+        }
+        resources.updateConfiguration(config, resources.displayMetrics)
+//        context.createConfigurationContext(config)
+        recreate()
     }
 
     private fun openDrawerLink() {
