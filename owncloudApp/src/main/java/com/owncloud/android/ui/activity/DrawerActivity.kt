@@ -29,7 +29,9 @@ package com.owncloud.android.ui.activity
 import android.accounts.Account
 import android.accounts.AccountManager
 import android.accounts.AccountManagerFuture
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
@@ -67,11 +69,13 @@ import com.owncloud.android.presentation.capabilities.CapabilityViewModel
 import com.owncloud.android.presentation.common.DrawerViewModel
 import com.owncloud.android.presentation.common.UIResult
 import com.owncloud.android.presentation.settings.SettingsActivity
+import com.owncloud.android.ui.helpers.LocaleHelper
 import com.owncloud.android.utils.DisplayUtils
 import com.owncloud.android.utils.PreferenceUtils
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
+import java.util.Locale
 import kotlin.math.ceil
 
 /**
@@ -190,6 +194,7 @@ abstract class DrawerActivity : ToolbarActivity() {
                 R.id.drawer_menu_feedback -> openFeedback()
                 R.id.drawer_menu_help -> openHelp()
                 R.id.drawer_menu_privacy_policy -> openPrivacyPolicy()
+                R.id.drawer_menu_locale -> changeLocale(applicationContext)
                 else -> Timber.i("Unknown drawer menu item clicked: %s", menuItem.title)
             }
             true
@@ -258,6 +263,16 @@ abstract class DrawerActivity : ToolbarActivity() {
 
     private fun openFeedback() {
         sendEmailOrOpenFeedbackDialogAction(drawerViewModel.getFeedbackMail())
+    }
+
+    private fun changeLocale(context: Context) {
+        val localeLang = LocaleHelper.getLanguage(context)
+        if (localeLang.contains("vi")) {
+            LocaleHelper.persist(context, "en")
+        } else {
+            LocaleHelper.persist(context, "vi")
+        }
+        recreate()
     }
 
     private fun openDrawerLink() {

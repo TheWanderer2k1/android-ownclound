@@ -68,6 +68,7 @@ import com.owncloud.android.providers.MdmProvider
 import com.owncloud.android.ui.activity.FileDisplayActivity
 import com.owncloud.android.ui.activity.FileDisplayActivity.Companion.PREFERENCE_CLEAR_DATA_ALREADY_TRIGGERED
 import com.owncloud.android.ui.activity.WhatsNewActivity
+import com.owncloud.android.ui.helpers.LocaleHelper
 import com.owncloud.android.utils.CONFIGURATION_ALLOW_SCREENSHOTS
 import com.owncloud.android.utils.DOWNLOAD_NOTIFICATION_CHANNEL_ID
 import com.owncloud.android.utils.DebugInjector
@@ -305,6 +306,10 @@ class MainApp : Application() {
             return false
         }
         return AccountUtils.getCurrentOwnCloudAccount(appContext) == null
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(LocaleHelper.onAttach(base, "vi"))
     }
 
     companion object {
