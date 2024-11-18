@@ -46,7 +46,7 @@
         <item
             android:orderInCategory="3"
             android:id="@+id/drawer_menu_locale"
-            android:icon="@drawable/ic_settings"
+            android:icon="@drawable/localization"
             android:title="@string/prefs_locale" />
     </group>
 
