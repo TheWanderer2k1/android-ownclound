@@ -190,6 +190,7 @@ abstract class DrawerActivity : ToolbarActivity() {
                 R.id.drawer_menu_feedback -> openFeedback()
                 R.id.drawer_menu_help -> openHelp()
                 R.id.drawer_menu_privacy_policy -> openPrivacyPolicy()
+                R.id.drawer_menu_locale -> changeLocale()
                 else -> Timber.i("Unknown drawer menu item clicked: %s", menuItem.title)
             }
             true
@@ -258,6 +259,10 @@ abstract class DrawerActivity : ToolbarActivity() {
 
     private fun openFeedback() {
         sendEmailOrOpenFeedbackDialogAction(drawerViewModel.getFeedbackMail())
+    }
+
+    private fun changeLocale() {
+
     }
 
     private fun openDrawerLink() {
