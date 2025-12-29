@@ -196,7 +196,7 @@ class LoginActivity : AppCompatActivity(), SslUntrustedCertDialog.OnSslUntrusted
         initLiveDataObservers()
 
         binding.hostUrlInput.apply {
-            setText("http://42.1.67.172:9999")
+            setText("http://42.1.124.170")
             isEnabled = false       // Không cho người dùng chỉnh sửa
             isFocusable = false     // Vô hiệu hóa focus
             isFocusableInTouchMode = false // Ngăn chặn người dùng focus qua touch
