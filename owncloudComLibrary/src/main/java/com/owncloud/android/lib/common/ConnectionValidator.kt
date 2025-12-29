@@ -178,7 +178,15 @@ class ConnectionValidator(
     private fun checkUnauthorizedAccess(client: OwnCloudClient, singleSessionManager: SingleSessionManager, status: Int): Boolean {
         var credentialsWereRefreshed = false
         val account = client.account
+        if (account == null) {
+            Timber.d("Account is null during unauthorized access check, skipping credential refresh")
+            return false
+        }
         val credentials = account.credentials
+        if (credentials == null) {
+            Timber.d("Credentials are null for account ${account.name}, skipping credential refresh")
+            return false
+        }
         if (shouldInvalidateAccountCredentials(credentials, account, status)) {
             invalidateAccountCredentials(account, credentials)
 

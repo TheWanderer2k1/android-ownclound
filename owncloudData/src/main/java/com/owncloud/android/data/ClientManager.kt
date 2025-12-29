@@ -67,20 +67,23 @@ class ClientManager(
      * Returns a client for the login process.
      * Helpful to keep the cookies from the status request to the final login and user info retrieval.
      * For regular uses, use [getClientForAccount]
+     *
+     * @param skipConnectionValidator 
      */
     fun getClientForAnonymousCredentials(
         path: String,
         requiresNewClient: Boolean,
-        ownCloudCredentials: OwnCloudCredentials? = getAnonymousCredentials()
+        ownCloudCredentials: OwnCloudCredentials? = getAnonymousCredentials(),
+        skipConnectionValidator: Boolean = false
     ): OwnCloudClient {
         val safeClient = ownCloudClient
         val pathUri = path.toUri()
 
         return if (requiresNewClient || safeClient == null || safeClient.baseUri != pathUri) {
-            Timber.d("Creating new client for path: $pathUri. Old client path: ${safeClient?.baseUri}, requiresNewClient: $requiresNewClient")
+            Timber.d("Creating new client for path: $pathUri. Old client path: ${safeClient?.baseUri}, requiresNewClient: $requiresNewClient, skipConnectionValidator: $skipConnectionValidator")
             OwnCloudClient(
                 pathUri,
-                connectionValidator,
+                if (skipConnectionValidator) null else connectionValidator,
                 true,
                 SingleSessionManager.getDefaultSingleton(),
                 context
